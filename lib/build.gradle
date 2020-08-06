@@ -1,0 +1,77 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'it.scoppelletti.spaceship.spaceship-gradle-android'
+
+group 'it.scoppelletti.spaceship'
+description 'Spaceship for Security'
+archivesBaseName = 'spaceship-security'
+
+android {
+    compileSdkVersion sdk_target
+    defaultConfig {
+        minSdkVersion sdk_min
+        targetSdkVersion sdk_target
+        versionCode 1
+        versionName '1.0.0'
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            consumerProguardFiles 'consumer-rules.pro'
+            debuggable false
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+}
+
+spaceship {
+    url = 'http://github.com/dscoppelletti/spaceship-security'
+    scmUrl = 'git@github.com:dscoppelletti/spaceship-security.git'
+    inceptionYear = '2017-2019'
+}
+
+configurations {
+    bom
+    api.extendsFrom(bom)
+    kapt.extendsFrom(bom)
+}
+
+dependencies {
+    bom platform(BOM)
+    api 'androidx.annotation:annotation'
+    api 'androidx.appcompat:appcompat'
+    api 'com.google.dagger:dagger'
+    kapt 'com.google.dagger:dagger-compiler'
+    api 'com.squareup.okio:okio'
+    api 'it.scoppelletti.spaceship:spaceship'
+    api 'it.scoppelletti.spaceship:spaceship-stdlib'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
+    implementation 'io.github.microutils:kotlin-logging'
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'org.threeten:threetenbp::no-tzdb'
+    testImplementation 'junit:junit'
+    testImplementation "org.bouncycastle:bcprov-jdk15on:${bc_version}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:${kotlin_version}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}"
+    testImplementation 'org.mockito:mockito-core'
+    testRuntimeOnly 'org.slf4j:slf4j-simple'
+}
