@@ -8,23 +8,24 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import it.scoppelletti.spaceship.app.showExceptionDialog
+import it.scoppelletti.spaceship.security.sample.databinding.MainActivityBinding
 import it.scoppelletti.spaceship.security.sample.lifecycle.MainState
 import it.scoppelletti.spaceship.security.sample.lifecycle.MainViewModel
-import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.main_activity)
-        setSupportActionBar(toolbar)
+        binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         val fragment = supportFragmentManager.findFragmentById(
                 R.id.contentFrame)
@@ -34,23 +35,24 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        viewModel.state.observe(this, Observer { state ->
+        viewModel.state.observe(this) { state ->
             if (state != null) {
                 stateObserver(state)
             }
-        })
+        }
     }
 
     private fun stateObserver(state: MainState) {
         if (state.waiting) {
-            progressIndicator.show()
+            binding.progressIndicator.show()
             return
         }
 
-        progressIndicator.hide()
+        binding.progressIndicator.hide()
 
         state.messageId?.poll()?.let { messageId ->
-            Snackbar.make(contentFrame, messageId, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.contentFrame, messageId,
+                    Snackbar.LENGTH_SHORT).show()
         }
 
         state.error?.poll()?.let { err ->

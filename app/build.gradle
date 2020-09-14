@@ -40,6 +40,10 @@ android {
     }
 }
 
+androidExtensions {
+    features = ['parcelize']
+}
+
 configurations {
     bom
     implementation.extendsFrom(bom)

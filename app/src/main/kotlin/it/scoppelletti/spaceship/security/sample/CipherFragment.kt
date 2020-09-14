@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import it.scoppelletti.spaceship.app.appComponent
 import it.scoppelletti.spaceship.app.hideSoftKeyboard
@@ -53,11 +52,11 @@ class CipherFragment : Fragment() {
         cipherModel = viewModelProvider.get(this, CipherViewModel::class.java)
         binding.model = cipherModel.form
 
-        cipherModel.state.observe(viewLifecycleOwner, Observer { state ->
+        cipherModel.state.observe(viewLifecycleOwner) { state ->
             if (state != null) {
                 mainModel.setState(state)
             }
-        })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import it.scoppelletti.spaceship.app.appComponent
 import it.scoppelletti.spaceship.app.hideSoftKeyboard
@@ -68,11 +67,11 @@ class KeyFragment : Fragment() {
         keyModel = viewModelProvider.get(this, KeyViewModel::class.java)
         binding.model = keyModel.form
 
-        keyModel.state.observe(viewLifecycleOwner, Observer { state ->
+        keyModel.state.observe(viewLifecycleOwner) { state ->
             if (state != null) {
                 mainModel.setState(state)
             }
-        })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
