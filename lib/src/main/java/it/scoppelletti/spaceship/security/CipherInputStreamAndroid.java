@@ -81,13 +81,19 @@ import androidx.annotation.RequiresApi;
  */
 class CipherInputStreamAndroid extends FilterInputStream {
     // the cipher engine to use to process stream data
+    @SuppressWarnings("FieldMayBeFinal")
     private Cipher cipher;
+
     // the underlying input stream
+    @SuppressWarnings("FieldMayBeFinal")
     private InputStream input;
+
     /* the buffer holding data that have been read in from the
        underlying stream, but have not been processed by the cipher
        engine. the size 512 bytes is somewhat randomly chosen */
+    @SuppressWarnings("FieldMayBeFinal")
     private byte[] ibuffer = new byte[512];
+
     // having reached the end of the underlying input stream
     private boolean done = false;
     /* the buffer holding data that have been processed by the cipher
