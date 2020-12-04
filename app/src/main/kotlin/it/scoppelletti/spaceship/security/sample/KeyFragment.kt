@@ -3,16 +3,14 @@
 package it.scoppelletti.spaceship.security.sample
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import by.kirich1409.viewbindingdelegate.viewBinding
 import it.scoppelletti.spaceship.app.appComponent
 import it.scoppelletti.spaceship.app.hideSoftKeyboard
 import it.scoppelletti.spaceship.lifecycle.ViewModelProviderEx
@@ -21,24 +19,14 @@ import it.scoppelletti.spaceship.security.sample.lifecycle.KeyForm
 import it.scoppelletti.spaceship.security.sample.lifecycle.KeyViewModel
 import it.scoppelletti.spaceship.security.sample.lifecycle.MainViewModel
 
-class KeyFragment : Fragment() {
+class KeyFragment : Fragment(R.layout.key_fragment) {
 
     private lateinit var mainModel: MainViewModel
     private lateinit var keyModel: KeyViewModel
-    private lateinit var binding: KeyFragmentBinding
+    private val binding by viewBinding(KeyFragmentBinding::bind)
 
     init {
         setHasOptionsMenu(true)
-    }
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.key_fragment,
-                container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

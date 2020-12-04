@@ -3,16 +3,13 @@
 package it.scoppelletti.spaceship.security.sample
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import by.kirich1409.viewbindingdelegate.viewBinding
 import it.scoppelletti.spaceship.app.appComponent
 import it.scoppelletti.spaceship.app.hideSoftKeyboard
 import it.scoppelletti.spaceship.lifecycle.ViewModelProviderEx
@@ -21,23 +18,13 @@ import it.scoppelletti.spaceship.security.sample.lifecycle.CipherForm
 import it.scoppelletti.spaceship.security.sample.lifecycle.CipherViewModel
 import it.scoppelletti.spaceship.security.sample.lifecycle.MainViewModel
 
-class CipherFragment : Fragment() {
+class CipherFragment : Fragment(R.layout.cipher_fragment) {
     private lateinit var mainModel: MainViewModel
     private lateinit var cipherModel: CipherViewModel
-    private lateinit var binding: CipherFragmentBinding
+    private val binding by viewBinding(CipherFragmentBinding::bind)
 
     init {
         setHasOptionsMenu(true)
-    }
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.cipher_fragment,
-                container, false)
-        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

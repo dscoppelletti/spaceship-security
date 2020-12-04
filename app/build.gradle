@@ -65,6 +65,7 @@ dependencies {
     implementation 'com.google.dagger:dagger'
     kapt 'com.google.dagger:dagger-compiler'
     implementation 'com.jakewharton.threetenabp:threetenabp'
+    implementation 'com.kirich1409.viewbindingpropertydelegate:vbpd-noreflection'
     implementation 'com.squareup.okio:okio'
     implementation 'it.scoppelletti.spaceship:spaceship'
     implementation 'it.scoppelletti.spaceship:spaceship-html'

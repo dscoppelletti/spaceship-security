@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ProviderFragment">
-    <ScrollView android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView android:id="@+id/txtContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/it_scoppelletti_marginVert"
-            android:layout_marginBottom="@dimen/it_scoppelletti_marginVert"
-            android:layout_marginLeft="@dimen/it_scoppelletti_marginHorz"
-            android:layout_marginRight="@dimen/it_scoppelletti_marginHorz"
-            android:textIsSelectable="true" />
-    </ScrollView>
-</layout>
+    tools:context=".ProviderFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView android:id="@+id/txtContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/it_scoppelletti_marginVert"
+        android:layout_marginBottom="@dimen/it_scoppelletti_marginVert"
+        android:layout_marginLeft="@dimen/it_scoppelletti_marginHorz"
+        android:layout_marginRight="@dimen/it_scoppelletti_marginHorz"
+        android:textIsSelectable="true" />
+</ScrollView>
+
