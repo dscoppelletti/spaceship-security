@@ -27,11 +27,11 @@ class CipherFragment : Fragment(R.layout.cipher_fragment) {
         setHasOptionsMenu(true)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
         val activity: FragmentActivity
         val viewModelProvider: ViewModelProviderEx
 
-        super.onActivityCreated(savedInstanceState)
+        super.onViewStateRestored(savedInstanceState)
 
         activity = requireActivity()
         viewModelProvider = activity.appComponent().viewModelProvider()

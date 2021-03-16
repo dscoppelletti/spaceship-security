@@ -16,10 +16,10 @@ class ProviderFragment : Fragment(R.layout.provider_fragment) {
     private lateinit var viewModel: ProviderViewModel
     private val binding by viewBinding(ProviderFragmentBinding::bind)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
         val activity: FragmentActivity
 
-        super.onActivityCreated(savedInstanceState)
+        super.onViewStateRestored(savedInstanceState)
 
         activity = requireActivity()
 

@@ -43,11 +43,11 @@ class KeyFragment : Fragment(R.layout.key_fragment) {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
         val activity: FragmentActivity
         val viewModelProvider: ViewModelProviderEx
 
-        super.onActivityCreated(savedInstanceState)
+        super.onViewStateRestored(savedInstanceState)
 
         activity = requireActivity()
         viewModelProvider = activity.appComponent().viewModelProvider()
