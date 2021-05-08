@@ -1,7 +1,6 @@
 package it.scoppelletti.spaceship.security.sample
 
 import android.app.Application
-import com.jakewharton.threetenabp.AndroidThreeTen
 import it.scoppelletti.spaceship.html.inject.HtmlComponent
 import it.scoppelletti.spaceship.html.inject.HtmlComponentProvider
 import it.scoppelletti.spaceship.inject.AppComponent
@@ -17,7 +16,6 @@ class MainApp : Application(), HtmlComponentProvider {
     override fun onCreate() {
         super.onCreate()
 
-        AndroidThreeTen.init(this)
         _sampleComponent = DaggerSampleComponent.factory()
                 .create(this)
     }

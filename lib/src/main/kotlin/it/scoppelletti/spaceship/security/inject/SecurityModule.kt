@@ -29,8 +29,8 @@ import it.scoppelletti.spaceship.security.CryptoProvider
 import it.scoppelletti.spaceship.security.cryptoProvider
 import it.scoppelletti.spaceship.security.i18n.DefaultSecurityMessages
 import it.scoppelletti.spaceship.security.i18n.SecurityMessages
-import org.threeten.bp.Clock
 import java.security.SecureRandom
+import java.time.Clock
 import javax.inject.Named
 import javax.inject.Singleton
 

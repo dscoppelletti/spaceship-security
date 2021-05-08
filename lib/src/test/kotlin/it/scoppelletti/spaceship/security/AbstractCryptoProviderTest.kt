@@ -5,8 +5,6 @@ package it.scoppelletti.spaceship.security
 import it.scoppelletti.spaceship.io.closeQuietly
 import it.scoppelletti.spaceship.types.FakeClock
 import kotlinx.coroutines.runBlocking
-import org.threeten.bp.Clock
-import org.threeten.bp.ZonedDateTime
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -16,6 +14,8 @@ import java.io.ObjectOutputStream
 import java.io.OutputStream
 import java.security.GeneralSecurityException
 import java.security.SecureRandom
+import java.time.Clock
+import java.time.ZonedDateTime
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
 import kotlin.test.assertFailsWith

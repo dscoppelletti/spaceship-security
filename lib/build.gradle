@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.dokka'
-apply plugin: 'it.scoppelletti.spaceship.spaceship-gradle-android'
+apply plugin: 'it.scoppelletti.spaceship.android-library'
 
 group 'it.scoppelletti.spaceship'
 description 'Spaceship for Security'
@@ -29,6 +29,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -51,6 +52,7 @@ configurations {
     bom
     api.extendsFrom(bom)
     kapt.extendsFrom(bom)
+    coreLibraryDesugaring.extendsFrom(bom)
 }
 
 dependencies {
@@ -66,11 +68,11 @@ dependencies {
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
     implementation 'io.github.microutils:kotlin-logging'
     implementation 'org.slf4j:slf4j-api'
-    implementation 'org.threeten:threetenbp::no-tzdb'
     testImplementation 'junit:junit'
     testImplementation 'org.bouncycastle:bcprov-jdk15on'
     testImplementation "org.jetbrains.kotlin:kotlin-test:${kotlin_version}"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}"
     testImplementation 'org.mockito:mockito-core'
     testRuntimeOnly 'org.slf4j:slf4j-simple'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs'
 }

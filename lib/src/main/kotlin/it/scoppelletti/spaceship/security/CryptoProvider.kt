@@ -22,12 +22,12 @@ import android.content.Context
 import android.os.Build
 import it.scoppelletti.spaceship.io.IOProvider
 import it.scoppelletti.spaceship.security.i18n.SecurityMessages
-import org.threeten.bp.Clock
 import java.io.InputStream
 import java.io.OutputStream
 import java.security.GeneralSecurityException
 import java.security.Key
 import java.security.SecureRandom
+import java.time.Clock
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
 
@@ -121,10 +121,7 @@ public fun cryptoProvider(
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ->
                 CryptoProviderMarshmallow(random,
                         DefaultSecurityBridge(context, clock), securityMessages)
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ->
-                CryptoProviderJellyBeanMR2(ioProvider, clock,
-                        random, DefaultSecurityBridge(context, clock),
-                        securityMessages)
-            else -> DefaultCryptoProvider(random, DefaultSecurityBridge(context,
-                    clock), securityMessages)
+            else ->
+                CryptoProviderJellyBeanMR2(ioProvider, clock, random,
+                        DefaultSecurityBridge(context, clock), securityMessages)
         }

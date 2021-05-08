@@ -19,9 +19,13 @@ import kotlinx.coroutines.withContext
 import okio.BufferedSink
 import okio.BufferedSource
 import okio.ByteString
-import okio.Okio
+import okio.ByteString.Companion.decodeBase64
+import okio.ByteString.Companion.toByteString
 import okio.Sink
 import okio.Source
+import okio.buffer
+import okio.sink
+import okio.source
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -76,8 +80,8 @@ class CipherViewModel(
                 val outputStream: ByteArrayOutputStream
 
                 outputStream = ByteArrayOutputStream()
-                sink = Okio.sink(outputStream)
-                bufSink = Okio.buffer(sink)
+                sink = outputStream.sink()
+                bufSink = sink.buffer()
 
                 bufSink.writeInt(cipher.iv.size)
                 bufSink.write(cipher.iv)
@@ -97,7 +101,7 @@ class CipherViewModel(
                 }
 
                 data = outputStream.toByteArray()
-                buf = ByteString.of(data, 0, data.size)
+                buf = data.toByteString(0, data.size)
                 buf.base64()
             }
 
@@ -131,7 +135,7 @@ class CipherViewModel(
                 val bufSource: BufferedSource
                 val buf: ByteString?
 
-                buf = ByteString.decodeBase64(cipherText)
+                buf = cipherText.decodeBase64()
                 if (buf == null) {
                     throw IOException("No base64 data.")
                 }
@@ -141,8 +145,8 @@ class CipherViewModel(
                 }
 
                 inputStream = ByteArrayInputStream(buf.toByteArray())
-                source = Okio.source(inputStream)
-                bufSource = Okio.buffer(source)
+                source = inputStream.source()
+                bufSource = source.buffer()
 
                 ivSize = bufSource.readInt()
 
@@ -163,7 +167,7 @@ class CipherViewModel(
                 var bufSource: BufferedSource
                 var inputStream: InputStream
 
-                buf = ByteString.decodeBase64(cipherText)
+                buf = cipherText.decodeBase64()
                 if (buf == null) {
                     throw IOException("No base64 data.")
                 }
@@ -173,8 +177,8 @@ class CipherViewModel(
                 }
 
                 inputStream = ByteArrayInputStream(buf.toByteArray())
-                source = Okio.source(inputStream)
-                bufSource = Okio.buffer(source)
+                source = inputStream.source()
+                bufSource = source.buffer()
 
                 ivSize = bufSource.readInt()
                 bufSource.readByteArray(ivSize.toLong())
@@ -192,8 +196,8 @@ class CipherViewModel(
                 inputStream = ByteArrayInputStream(data)
                 decryptor = cryptoProvider.cipherInputStream(inputStream,
                         cipher)
-                source = Okio.source(decryptor)
-                bufSource = Okio.buffer(source)
+                source = decryptor.source()
+                bufSource = source.buffer()
 
                 bufSource.readUtf8()
             }

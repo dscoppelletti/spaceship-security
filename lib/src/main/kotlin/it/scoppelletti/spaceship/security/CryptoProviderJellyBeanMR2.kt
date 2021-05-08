@@ -33,11 +33,13 @@ import mu.KotlinLogging
 import okio.BufferedSink
 import okio.BufferedSource
 import okio.ByteString
-import okio.Okio
+import okio.ByteString.Companion.decodeBase64
+import okio.ByteString.Companion.toByteString
 import okio.Sink
 import okio.Source
-import org.threeten.bp.Clock
-import org.threeten.bp.ZonedDateTime
+import okio.buffer
+import okio.sink
+import okio.source
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -49,6 +51,8 @@ import java.security.SecureRandom
 import java.security.cert.Certificate
 import java.security.cert.X509Certificate
 import java.security.spec.AlgorithmParameterSpec
+import java.time.Clock
+import java.time.ZonedDateTime
 import java.util.Date
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
@@ -209,10 +213,10 @@ internal class CryptoProviderJellyBeanMR2(
                     }
 
             key = cipher.wrap(secretKey)
-            source = ByteString.of(key!!, 0, key.size)
+            source = key!!.toByteString(0, key.size)
 
-            sink = Okio.sink(file)
-            bufSink = Okio.buffer(sink!!)
+            sink = file.sink()
+            bufSink = sink.buffer()
             sink = null
 
             bufSink.writeUtf8(source.base64())
@@ -256,11 +260,11 @@ internal class CryptoProviderJellyBeanMR2(
                         init(Cipher.UNWRAP_MODE, keyPair.private)
                     }
 
-            source = Okio.source(file)
-            bufSource = Okio.buffer(source!!)
+            source = file.source()
+            bufSource = source.buffer()
             source = null
 
-            sink = ByteString.decodeBase64(bufSource.readUtf8())
+            sink = bufSource.readUtf8().decodeBase64()
             if (sink == null) {
                 throw IOException("No Base64 data.")
             }

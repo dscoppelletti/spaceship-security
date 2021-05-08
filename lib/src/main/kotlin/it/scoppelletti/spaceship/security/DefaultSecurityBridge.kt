@@ -24,11 +24,11 @@ import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import androidx.annotation.RequiresApi
-import org.threeten.bp.Clock
-import org.threeten.bp.ZonedDateTime
 import java.security.KeyPairGenerator
 import java.security.KeyStore
 import java.security.spec.AlgorithmParameterSpec
+import java.time.Clock
+import java.time.ZonedDateTime
 import java.util.Date
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
@@ -124,11 +124,8 @@ internal class DefaultSecurityBridge(
                 .setSerialNumber(serialNumber.toBigInteger())
                 .setStartDate(Date(startDate.toEpochSecond() * 1000L))
                 .setEndDate(Date(endDate.toEpochSecond() * 1000L))
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            builder.setKeyType(SecurityExt.KEY_ALGORITHM_RSA)
-                    .setKeySize(SecurityExt.RSA_KEYSIZE)
-        }
+                .setKeyType(SecurityExt.KEY_ALGORITHM_RSA)
+                .setKeySize(SecurityExt.RSA_KEYSIZE)
 
         return builder.build()
     }

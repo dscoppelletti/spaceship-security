@@ -3,7 +3,6 @@
 package it.scoppelletti.spaceship.security
 
 import it.scoppelletti.spaceship.io.closeQuietly
-import org.threeten.bp.Clock
 import java.io.ByteArrayOutputStream
 import java.io.OutputStream
 import java.security.Key
@@ -14,6 +13,7 @@ import java.security.PrivateKey
 import java.security.SecureRandom
 import java.security.Security
 import java.security.spec.AlgorithmParameterSpec
+import java.time.Clock
 import javax.crypto.Cipher
 import javax.crypto.CipherOutputStream
 import javax.crypto.KeyGenerator
