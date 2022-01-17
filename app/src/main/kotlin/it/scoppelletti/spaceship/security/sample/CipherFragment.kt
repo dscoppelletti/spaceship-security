@@ -35,7 +35,7 @@ class CipherFragment : Fragment(R.layout.cipher_fragment) {
 
         activity = requireActivity()
         viewModelProvider = activity.appComponent().viewModelProvider()
-        mainModel = ViewModelProvider(activity).get(MainViewModel::class.java)
+        mainModel = ViewModelProvider(activity)[MainViewModel::class.java]
         cipherModel = viewModelProvider.get(this, CipherViewModel::class.java)
         binding.model = cipherModel.form
 

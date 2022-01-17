@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             navigateToFragment(R.id.cmd_key)
         }
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         viewModel.state.observe(this) { state ->
             if (state != null) {
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         MenuCompat.setGroupDividerEnabled(menu, true)
         return true

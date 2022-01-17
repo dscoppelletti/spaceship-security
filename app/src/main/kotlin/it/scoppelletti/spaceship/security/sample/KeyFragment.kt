@@ -51,7 +51,7 @@ class KeyFragment : Fragment(R.layout.key_fragment) {
 
         activity = requireActivity()
         viewModelProvider = activity.appComponent().viewModelProvider()
-        mainModel = ViewModelProvider(activity).get(MainViewModel::class.java)
+        mainModel = ViewModelProvider(activity)[MainViewModel::class.java]
         keyModel = viewModelProvider.get(this, KeyViewModel::class.java)
         binding.model = keyModel.form
 

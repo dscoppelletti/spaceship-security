@@ -24,7 +24,7 @@ class ProviderFragment : Fragment(R.layout.provider_fragment) {
         activity = requireActivity()
 
         activity.hideSoftKeyboard()
-        viewModel = ViewModelProvider(this).get(ProviderViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ProviderViewModel::class.java]
         viewModel.state.observe(viewLifecycleOwner) { state ->
             if (state != null) {
                 binding.txtContent.text = state
